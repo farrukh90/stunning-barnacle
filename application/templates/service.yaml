@@ -1,15 +1,25 @@
-apiVersion: v1
+---
 kind: Service
+apiVersion: v1
 metadata:
-  name: {{ include "application.fullname" . }}
-  labels:
-    {{- include "application.labels" . | nindent 4 }}
+  name: rollout-bluegreen-active
 spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
   selector:
-    {{- include "application.selectorLabels" . | nindent 4 }}
+    app: rollout-bluegreen
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: rollout-bluegreen-preview
+spec:
+  selector:
+    app: rollout-bluegreen
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
