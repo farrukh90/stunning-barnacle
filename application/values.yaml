@@ -52,6 +52,9 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
+          backend:
+            service:
+              name: rollout-bluegreen-preview
   tls: 
     - secretName: rollout-tls
       hosts:
