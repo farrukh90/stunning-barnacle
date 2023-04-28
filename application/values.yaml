@@ -57,7 +57,8 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
           backend:
-            serviceName: rollout-bluegreen-active
+            service:
+              name:  rollout-bluegreen-active
 
 
 resources: {}
